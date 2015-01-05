@@ -1,8 +1,7 @@
-var hyperquest = require('hyperquest')
-  , XML = require('simple-xml')
-  , StringStream = require('stream-ext').StringStream
-  , zlib = require('zlib')
-  ;
+var hyperquest = require('hyperquest'),
+  XML = require('simple-xml'),
+  StringStream = require('stream-ext').StringStream,
+  zlib = require('zlib');
 
 module.exports = function soap (uri, operation, action, message, options, callback) {
   if (typeof options === 'function') {
@@ -62,7 +61,7 @@ function headers (schema, length) {
     'Content-Length': length,
     'Accept-Encoding': 'gzip',
     Accept: '*/*'
-  }
+  };
 }
 
 function namespaces (ns) {
@@ -78,9 +77,9 @@ function serializeOperation (operation, options) {
 }
 
 function gunzip (callback) {
-  var gunzip = zlib.createGunzip();
-  gunzip.on('error', callback);
-  return gunzip;
+  var extract = zlib.createGunzip();
+  extract.on('error', callback);
+  return extract;
 }
 
 function isGzipped(response) {
